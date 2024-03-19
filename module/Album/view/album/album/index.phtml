@@ -1,0 +1,56 @@
+<?php
+
+use Zend\Db\Adapter\Adapter;
+ 
+// module/Album/view/album/album/index.phtml:
+
+ $title = 'My albums';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('album', array('action'=>'add'));?>">Add new album</a>
+ </p>
+
+<?php
+
+
+// Create a database connection
+// $adapter = new Adapter([
+//     'driver' => 'Pdo_Mysql',
+//     'database' => 'data',
+//     'username' => 'root',
+//     'password' => '',
+// ]);
+
+
+// // Retrieve data from the database
+// $resultSet = $adapter->query('SELECT * FROM album')->execute();
+
+
+// Display the data
+
+// foreach ($resultSet as $row) :
+//     print_r($row['artist']).'\n'; // Outputs
+// endforeach;
+?>
+
+<table class="table">
+ <tr>
+     <th>Title</th>
+     <th>Artist</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($rows as $row) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($row['title']);?></td>
+     <td><?php echo $this->escapeHtml($row['artist']);?></td>
+     <td>
+         <a href="<?php echo $this->url('album',
+             array('action'=>'edit', 'id' => $row['id']));?>">Edit</a>
+         <a href="<?php echo $this->url('album',
+             array('action'=>'delete', 'id' => $row['id']));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
